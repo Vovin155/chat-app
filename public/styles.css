@@ -1,0 +1,80 @@
+/* styles.css */
+body, html {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #333; /* Uniform dark gray background */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+    width: 90%;
+    max-width: 600px;
+    overflow-y: auto;
+}
+
+li {
+    background: #444;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    word-wrap: break-word;
+}
+
+form {
+    position: fixed;
+    bottom: 10px;
+    width: 80%; /* Set the form width to 80% of the screen width */
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+input[type="text"] {
+    flex: 1;  /* Allows the input to expand to fill the form */
+    margin: 0 10px;
+    padding: 10px;
+    font-size: 1.2rem; /* Increased font size for readability */
+}
+
+button {
+    padding: 10px 20px;
+    margin: 0 5px;
+    font-size: 1.2rem;
+}
+
+button#understoodButton {
+    position: fixed;
+    bottom: 50px;
+    width: 90%;
+}
+
+/* Media Query for Desktop Screens */
+@media (min-width: 768px) {
+    input[type="text"] {
+        width: calc(100% - 150px); /* Set the width of the input field, subtracting the button width */
+        font-size: 1.5rem; /* Increase the font size for better readability */
+        padding: 15px 20px; /* Increase padding for a taller input field */
+    }
+
+    button {
+        width: 140px; /* Set a fixed width for the button */
+    }
+
+    form {
+        width: 90%; /* Increase the width of the form on desktop */
+    }
+
+    ul {
+        max-width: 960px; /* Adjust the max-width for larger displays */
+    }
+}

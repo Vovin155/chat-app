@@ -4,7 +4,7 @@ body, html {
     height: 100%;
     color: white;
     background-color: #333; /* Dark gray background */
-    font-family: 'Playfair Display', serif; /* Ensure font-family is consistent */
+    font-family: 'Playfair Display', serif; /* Updated font family to Playfair Display */
     font-weight: 300;
     overflow: hidden; /* Prevent scrolling */
     display: flex;
@@ -14,7 +14,6 @@ body, html {
 .messages {
     flex-grow: 1;
     padding: 20px;
-    padding-bottom: 60px; /* Added padding to bottom for spacing above the button */
     overflow-y: auto; /* Allow vertical scrolling inside messages area */
     background: #444; /* Slightly lighter gray for messages area */
 }
@@ -30,9 +29,9 @@ body, html {
 
 #form, #understoodButton {
     position: fixed;
-    bottom: 10px; /* Ensure button is always at the bottom */
-    left: 10px;
-    right: 10px;
+    bottom: 10px;
+    left: 10px; /* Ensure left margin */
+    right: 10px; /* Ensure right margin */
     margin: 0; /* Remove any default margin */
 }
 
@@ -56,9 +55,13 @@ button {
     width: calc(100% - 20px); /* Adjust button width to prevent clipping */
     padding: 15px 0; /* Larger padding for easier interaction */
     font-size: 1.5rem; /* Very large font size for easy reading */
-    background-color: #3b135c; /* Purple shade */
+    background-color: #3b135c; /* Changed to purple shade */
     color: white;
     border: none;
     border-radius: 5px;
     display: none; /* Initially hidden, shown only for clients */
+}
+
+.message-read {
+    background-color: #3b135c; /* Purple shade for read messages */
 }

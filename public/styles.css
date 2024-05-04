@@ -1,80 +1,63 @@
-/* styles.css */
 body, html {
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-    padding: 0;
     margin: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #333; /* Uniform dark gray background */
+    padding: 0;
+    height: 100%;
     color: white;
+    background-color: #333; /* Dark gray background */
+    font-family: 'Alegreya', serif; /* Updated font family to Alegreya */
+    font-weight: 300;
+    overflow: hidden; /* Prevent scrolling */
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 20px 0;
-    width: 90%;
-    max-width: 600px;
-    overflow-y: auto;
+.messages {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto; /* Allow vertical scrolling inside messages area */
+    background: #444; /* Slightly lighter gray for messages area */
 }
 
-li {
-    background: #444;
-    padding: 12px;
+.message {
+    background-color: #4f4f4f; /* Each message box has a distinct gray background */
     margin: 10px 0;
-    border-radius: 8px;
-    word-wrap: break-word;
+    padding: 10px;
+    border-radius: 8px; /* Rounded corners for each message box */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    font-size: 1.25rem; /* Larger font size for readability */
 }
 
-form {
+#form, #understoodButton {
     position: fixed;
     bottom: 10px;
-    width: 80%; /* Set the form width to 80% of the screen width */
-    display: flex;
-    justify-content: center;
-    padding: 10px 0;
+    left: 10px; /* Ensure left margin */
+    right: 10px; /* Ensure right margin */
+    margin: 0; /* Remove any default margin */
 }
 
 input[type="text"] {
-    flex: 1;  /* Allows the input to expand to fill the form */
-    margin: 0 10px;
+    width: calc(100% - 90px); /* Full width minus button width */
     padding: 10px;
-    font-size: 1.2rem; /* Increased font size for readability */
+    font-size: 1.25rem; /* Larger font size for readability */
 }
 
 button {
-    padding: 10px 20px;
-    margin: 0 5px;
-    font-size: 1.2rem;
+    width: calc(100% - 20px); /* Adjust width to ensure it fits within the screen with padding */
+    padding: 10px;
+    font-size: 1.25rem; /* Larger font size for readability */
+    background-color: #0084ff; /* Bright blue for visibility */
+    color: white;
+    border: none; /* Remove border for cleaner look */
+    border-radius: 5px; /* Rounded corners */
 }
 
-button#understoodButton {
-    position: fixed;
-    bottom: 50px;
-    width: 90%;
-}
-
-/* Media Query for Desktop Screens */
-@media (min-width: 768px) {
-    input[type="text"] {
-        width: calc(100% - 150px); /* Set the width of the input field, subtracting the button width */
-        font-size: 1.5rem; /* Increase the font size for better readability */
-        padding: 15px 20px; /* Increase padding for a taller input field */
-    }
-
-    button {
-        width: 140px; /* Set a fixed width for the button */
-    }
-
-    form {
-        width: 90%; /* Increase the width of the form on desktop */
-    }
-
-    ul {
-        max-width: 960px; /* Adjust the max-width for larger displays */
-    }
+#understoodButton {
+    width: calc(100% - 20px); /* Adjust button width to prevent clipping */
+    padding: 15px 0; /* Larger padding for easier interaction */
+    font-size: 1.5rem; /* Very large font size for easy reading */
+    background-color: #25D366; /* WhatsApp green for visibility */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    display: none; /* Initially hidden, shown only for clients */
 }

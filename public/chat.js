@@ -1,49 +1,54 @@
-// chat.js
 document.addEventListener('DOMContentLoaded', () => {
-    var socket = io();
-    var hostStatus = document.getElementById('hostStatus');
-    var form = document.getElementById('form');
-    var input = document.getElementById('input');
-    var messages = document.getElementById('messages');
-    var understoodButton = document.getElementById('understoodButton');
+    const socket = io();
+    const form = document.getElementById('form');
+    const input = document.getElementById('input');
+    const messages = document.getElementById('messages');
+    const understoodButton = document.getElementById('understoodButton');
+    const isHost = window.location.hostname === "localhost"; // Check if the user is the host
 
-    // Display controls based on device width
-    if (window.innerWidth >= 768) {  // Assuming host is on desktop
-        hostStatus.style.display = 'block';  // Show the host status
-        understoodButton.style.display = 'none';  // Hide understood button for host
+    if (isHost) {
+        form.style.display = 'block';
+        input.hidden = false;
+        form.querySelector('button').hidden = false;
     } else {
-        form.style.display = 'none';  // Hide form for guest
-        understoodButton.style.display = 'block';  // Show understood button for guest
+        form.style.display = 'none';
+        understoodButton.style.display = 'block';
     }
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         if (input.value) {
             socket.emit('chat message', input.value);
+            // Directly add the message as 'sent' by host to avoid duplication
+            if (isHost) {
+                createMessageElement(input.value, 'You');
+                maintainThreeMessages(); // Ensure only three messages are displayed for the host as well
+            }
             input.value = '';
-            createMessageElement(input.value, 'pending');  // Create pending message view
         }
     });
 
     socket.on('chat message', function(msg) {
-        createMessageElement(msg, 'received');
-        maintainThreeMessages(); // Ensure only three messages are displayed
+        if (!isHost) {
+            createMessageElement(msg, '');
+            maintainThreeMessages(); // Ensure only three messages are displayed
+        }
     });
 
     socket.on('message read', function() {
         if (messages.lastChild) {
-            messages.lastChild.style.backgroundColor = 'green'; // Highlight the last message
+            messages.lastChild.style.backgroundColor = 'green';
         }
     });
 
     understoodButton.addEventListener('click', function() {
-        socket.emit('message read'); // Emit the message read event when understood is clicked
+        socket.emit('message read');
     });
 
-    function createMessageElement(msg, status) {
-        var item = document.createElement('li');
+    function createMessageElement(msg, sender) {
+        var item = document.createElement('div');
         item.textContent = msg;
-        item.className = 'message ' + status;
+        item.className = 'message';
         messages.appendChild(item);
     }
 

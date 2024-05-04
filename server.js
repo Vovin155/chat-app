@@ -1,25 +1,27 @@
-// server.js
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);  // Attach socket.io to the server
+const io = socketIo(server);
 
-// Serve static files from the public directory
+// Serve static files from the 'public' directory
 app.use(express.static('public'));
 
 io.on('connection', (socket) => {
-    console.log('A user connected');
+    console.log('New user connected');
 
+    // Event listener for chat messages
     socket.on('chat message', (msg) => {
-        io.emit('chat message', msg);  // Broadcast the message to all users
+        console.log("Chat message received:", msg);
+        io.emit('chat message', msg);  // Emitting to all clients
     });
 
+    // Event listener for 'message read' events
     socket.on('message read', () => {
-        console.log("Message Read Emitted");
-        io.emit('message read');  // Broadcast the read event to all users
+        console.log("Client has read the message");
+        io.emit('message read');  // Notify all clients
     });
 
     socket.on('disconnect', () => {

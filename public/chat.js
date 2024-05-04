@@ -19,10 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         if (input.value) {
             socket.emit('chat message', input.value);
-            // Directly add the message as 'sent' by host to avoid duplication
             if (isHost) {
                 createMessageElement(input.value, 'You');
-                maintainThreeMessages(); // Ensure only three messages are displayed for the host as well
+                maintainThreeMessages();
             }
             input.value = '';
         }
@@ -31,18 +30,21 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('chat message', function(msg) {
         if (!isHost) {
             createMessageElement(msg, '');
-            maintainThreeMessages(); // Ensure only three messages are displayed
+            maintainThreeMessages();
         }
     });
 
     socket.on('message read', function() {
-    if (messages.lastChild) {
-        messages.lastChild.classList.add('message-read'); // Apply CSS class instead of direct style
-    }
-});
+        if (messages.lastChild) {
+            messages.lastChild.classList.add('message-read');
+        }
+    });
 
     understoodButton.addEventListener('click', function() {
         socket.emit('message read');
+        if (messages.lastChild) {
+            messages.lastChild.classList.add('message-read');
+        }
     });
 
     function createMessageElement(msg, sender) {
@@ -54,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function maintainThreeMessages() {
         while (messages.children.length > 3) {
-            messages.removeChild(messages.firstChild); // Remove the oldest message
+            messages.removeChild(messages.firstChild);
         }
     }
 });

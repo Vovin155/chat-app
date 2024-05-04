@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById('input');
     const messages = document.getElementById('messages');
     const understoodButton = document.getElementById('understoodButton');
-    const isHost = window.location.hostname === "localhost"; // Check if the user is the host
+    const isHost = window.location.hostname === "simplichat-4574e9445db1.herokuapp.com";
 
     if (isHost) {
         form.style.display = 'block';

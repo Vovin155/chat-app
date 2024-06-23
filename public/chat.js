@@ -36,10 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     socket.on('message read', function() {
-    if (messages.lastChild) {
-        messages.lastChild.classList.add('message-read'); // Apply CSS class instead of direct style
-    }
-});
+        Array.from(messages.children).forEach(child => {
+            child.classList.add('message-read'); // Apply CSS class to all messages
+        });
+    });
 
     understoodButton.addEventListener('click', function() {
         socket.emit('message read');

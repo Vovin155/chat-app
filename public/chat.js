@@ -49,6 +49,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+<<<<<<< HEAD
+=======
+    socket.on('message read', function() {
+    if (messages.lastChild) {
+        messages.lastChild.classList.add('message-read'); // Apply CSS class instead of direct style
+    }
+});
+
+>>>>>>> parent of db8d7ca (Update chat.js)
     understoodButton.addEventListener('click', function() {
         socket.emit('message read');
     });

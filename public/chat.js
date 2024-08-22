@@ -17,6 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
         understoodButton.style.visibility = 'visible';
         understoodButton.style.display = 'block';
         welcomeMessage.style.display = 'block'; // Show the welcome message to the client
+
+        // Add event listener to the welcome message to hide it when clicked
+        welcomeMessage.addEventListener('click', function() {
+            welcomeMessage.style.display = 'none'; // Hide the welcome message
+            welcomeMessage.remove(); // Remove it from the DOM
+        });
     }
 
     form.addEventListener('submit', function(e) {
@@ -36,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             createMessageElement(msg, '');
             maintainOneMessage();
             welcomeMessage.style.display = 'none'; // Hide the welcome message once a chat message is received
+            welcomeMessage.remove(); // Remove it from the DOM
         }
     });
 

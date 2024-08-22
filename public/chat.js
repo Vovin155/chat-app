@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Directly add the message as 'sent' by host to avoid duplication
             if (isHost) {
                 createMessageElement(input.value, 'You');
-                maintainThreeMessages(); // Ensure only three messages are displayed for the host as well
+                maintainOneMessage(); // Ensure only one message is displayed for the host as well
             }
             input.value = '';
         }
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('chat message', function(msg) {
         if (!isHost) {
             createMessageElement(msg, '');
-            maintainThreeMessages(); // Ensure only three messages are displayed
+            maintainOneMessage(); // Ensure only one message is displayed on the client screen
         }
     });
 
@@ -46,15 +46,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function createMessageElement(msg, sender) {
+        // Clear any existing messages
+        while (messages.firstChild) {
+            messages.removeChild(messages.firstChild);
+        }
+
         var item = document.createElement('div');
         item.textContent = msg;
         item.className = 'message';
         messages.appendChild(item);
     }
 
-    function maintainThreeMessages() {
-        while (messages.children.length > 3) {
-            messages.removeChild(messages.firstChild); // Remove the oldest message
+    function maintainOneMessage() {
+        while (messages.children.length > 1) {
+            messages.removeChild(messages.firstChild); // Remove the previous message
         }
     }
 });

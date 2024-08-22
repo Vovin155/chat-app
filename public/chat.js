@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById('input');
     const messages = document.getElementById('messages');
     const understoodButton = document.getElementById('understoodButton');
+    const welcomeMessage = document.getElementById('welcomeMessage');
     const isHost = window.location.hostname === "simplichat-4574e9445db1.herokuapp.com";
 
     if (isHost) {
@@ -12,9 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
         form.querySelector('button').hidden = false;
     } else {
         form.style.display = 'none';
-        understoodButton.style.opacity = '1'; // Make the button visible
-        understoodButton.style.visibility = 'visible'; // Ensure it's visible
-        understoodButton.style.display = 'block'; // Ensure it's displayed
+        understoodButton.style.opacity = '1';
+        understoodButton.style.visibility = 'visible';
+        understoodButton.style.display = 'block';
+        welcomeMessage.style.display = 'block'; // Show the welcome message to the client
     }
 
     form.addEventListener('submit', function(e) {
@@ -33,13 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isHost) {
             createMessageElement(msg, '');
             maintainOneMessage();
+            welcomeMessage.style.display = 'none'; // Hide the welcome message once a chat message is received
         }
-    });
-
-    socket.on('message read', function() {
-        Array.from(messages.children).forEach(child => {
-            child.classList.add('message-read');
-        });
     });
 
     understoodButton.addEventListener('click', function() {

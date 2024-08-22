@@ -66,3 +66,18 @@ button {
 .message-read {
     background-color: #3b135c; /* Purple shade for read messages */
 }
+
+.welcome-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8); /* Dark background with some transparency */
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    text-align: center;
+    display: none; /* Initially hidden */
+    z-index: 1000; /* Ensure it appears above other elements */
+}

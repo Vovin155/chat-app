@@ -59,7 +59,8 @@ button {
     color: white;
     border: none;
     border-radius: 5px;
-    display: none; /* Initially hidden, shown only for clients */
+    opacity: 0; /* Initially hidden, but still rendered */
+    visibility: hidden; /* Hide visibility initially */
 }
 
 .message-read {

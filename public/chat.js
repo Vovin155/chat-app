@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const messages = document.getElementById('messages');
     const understoodButton = document.getElementById('understoodButton');
     const welcomeMessage = document.getElementById('welcomeMessage');
-    const isHost = window.location.hostname === "aphellion-f36610e6ec0d.herokuapp.com/";
+    const isHost = window.location.hostname === "simplichat-4574e9445db1.herokuapp.com";
 
     if (isHost) {
         form.style.display = 'block';

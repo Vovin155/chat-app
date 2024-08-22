@@ -12,17 +12,18 @@ document.addEventListener('DOMContentLoaded', () => {
         form.querySelector('button').hidden = false;
     } else {
         form.style.display = 'none';
-        understoodButton.style.display = 'block';
+        understoodButton.style.opacity = '1'; // Make the button visible
+        understoodButton.style.visibility = 'visible'; // Ensure it's visible
+        understoodButton.style.display = 'block'; // Ensure it's displayed
     }
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         if (input.value) {
             socket.emit('chat message', input.value);
-            // Directly add the message as 'sent' by host to avoid duplication
             if (isHost) {
                 createMessageElement(input.value, 'You');
-                maintainOneMessage(); // Ensure only one message is displayed for the host as well
+                maintainOneMessage();
             }
             input.value = '';
         }
@@ -31,13 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('chat message', function(msg) {
         if (!isHost) {
             createMessageElement(msg, '');
-            maintainOneMessage(); // Ensure only one message is displayed on the client screen
+            maintainOneMessage();
         }
     });
 
     socket.on('message read', function() {
         Array.from(messages.children).forEach(child => {
-            child.classList.add('message-read'); // Apply CSS class to all messages
+            child.classList.add('message-read');
         });
     });
 
@@ -46,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function createMessageElement(msg, sender) {
-        // Clear any existing messages
         while (messages.firstChild) {
             messages.removeChild(messages.firstChild);
         }
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function maintainOneMessage() {
         while (messages.children.length > 1) {
-            messages.removeChild(messages.firstChild); // Remove the previous message
+            messages.removeChild(messages.firstChild);
         }
     }
 });

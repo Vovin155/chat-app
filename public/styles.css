@@ -61,6 +61,8 @@ button {
     border-radius: 5px;
     opacity: 0; /* Initially hidden, but still rendered */
     visibility: hidden; /* Hide visibility initially */
+    z-index: 10; /* This is lower than the welcome message */
+    position: relative; /* Ensures it's still positioned correctly */
 }
 
 .message-read {
@@ -72,12 +74,11 @@ button {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.8); /* Dark background with some transparency */
+    background-color: rgba(0, 0, 0, 0.8);
     color: white;
     padding: 20px;
     border-radius: 8px;
     font-size: 1.5rem;
     text-align: center;
-    display: none; /* Initially hidden */
-    z-index: 1000; /* Ensure it appears above other elements */
+    z-index: 1000; /* Ensures it's above everything else */
 }
